@@ -62,20 +62,37 @@
 	};
 	
 	proto.getFiscalQuarter = function(yearEnd,dt){		
-		// $currQuarter = ceil(( date('n') + ( 21 - ( 9 -1 ))) /3 ) %4 +1 
 		var dt = this.isDate(dt) ? dt: new this.oDate();
 		var yearEnd = (yearEnd ? yearEnd : 11) +1;
 		var m = dt.getMonth();
-		
+		//hat tip to saltlakejohn - converted from his php function found somewhere on the interwebs
 		return Math.ceil(( m + ( 21 - ( yearEnd -1 ))) /3 ) %4 +1;
 	};
 
     proto.getStandardizedCDS = function(contractLengthYears, dt) {
+		var cds = {
+			cdsm1 : {
+				m : 2,
+				d : 20
+			}, 
+			cdsm2 : {
+				m : 5,
+				d : 20
+			},
+			cdsm3 : {
+				m : 8,
+				d : 20
+			},
+			cdsm4 : {
+				m : 11,
+				d : 20
+			}
+		};
         var dt = this.isDate(dt) ? dt: new this.oDate();
-		// TODO find the closest CDS date based on maturity of contract length on years
-
+		var q = this.getQuarter(dt);
+		var fCDS = cds['cdsm'+q];
+		var maturity = new this.oDate((parseInt(dt.getFullYear())+contractLengthYears),fCDS.m,fCDS.d);
+		return maturity;
     };
 
 } ();
-
-
