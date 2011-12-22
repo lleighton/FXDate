@@ -35,7 +35,9 @@
 	Does not account for public holidays on "week days" - e.g. Christmas day, Boxing Day and New Years 
 	day would be picked as the closest spot days if they fell on week days regardless of market status.
 	
-    A validator class should be additionally be used if you wish to check the validity of days against local holidays.
+    A validator class should be used outside of this lib if you wish to check the validity of days against local holidays.
+	
+	
 	*/
     proto.getSpot = function(dt) {
         var dt = this.isDate(dt) ? dt: new this.oDate();
@@ -70,31 +72,10 @@
 
     proto.getStandardizedCDS = function(contractLengthYears, dt) {
         var dt = this.isDate(dt) ? dt: new this.oDate();
-		
+		// TODO find the closest CDS date based on maturity of contract length on years
 
     };
 
 } ();
 
-var fxd = new FXDate();
 
-
-//TODO - write tests...
-var imm4_2011 = fxd.getIMM(4, 2011);
-var imm1_2012 = fxd.getIMM(1, 2012);
-var imm2_2012 = fxd.getIMM(2, 2012);
-var imm3_2012 = fxd.getIMM(3, 2012);
-var imm4_2012 = fxd.getIMM(4, 2012);
-// console.log(imm4_2012);
-
-var spotdate = new FXDate().getSpot();
-// console.log(spotdate);
-
-var qd = new Date(2011,1,14);
-// console.log(qd.toString())
-
-var quarter = fxd.getQuarter(qd);
-// console.log(quarter);
-
-var fq = fxd.getFiscalQuarter(7,qd);
-// console.log(fq)
