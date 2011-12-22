@@ -2,8 +2,9 @@
 
     var root = this;
     root.FXDate = root.FXDate ||
-    function(dateFunction) {
-        this.oDate = dateFunction || Date;
+	//if you use a date wrapper that supports the native js Date methods then you can optionally pass this in - e.g something like Date.js
+    function(dateClass) {
+        this.oDate = dateClass || Date;
         //TODO - pass in a list of blacklisted/holiday days to check against
     };
 
