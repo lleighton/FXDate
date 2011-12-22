@@ -4,7 +4,7 @@
     root.FXDate = root.FXDate ||
     function(dateFunction) {
         this.oDate = dateFunction || Date;
-        //do stuff specific to this instance...
+        //TODO - pass in a list of blacklisted/holiday days to check against
     };
 
     if (typeof module !== 'undefined' && module.exports) {
@@ -20,6 +20,10 @@
         return false;
         return ! isNaN(d.getTime());
     };
+
+	proto.isTradingDay = function(dt){
+		return this.isDate(dt) ? dt.getDay() < 6 && dt.getDay() > 0 ? true : false : false;
+	};
 
     proto.getIMM = function(quarter, year) {
         var y = year || new this.oDate().getFullYear();
