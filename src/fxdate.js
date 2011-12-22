@@ -21,9 +21,9 @@
         return ! isNaN(d.getTime());
     };
 
-	proto.isTradingDay = function(dt){
-		return this.isDate(dt) ? dt.getDay() < 6 && dt.getDay() > 0 ? true : false : false;
-	};
+    proto.isTradingDay = function(dt) {
+        return this.isDate(dt) ? dt.getDay() < 6 && dt.getDay() > 0 ? true: false: false;
+    };
 
     proto.getIMM = function(quarter, year) {
         var y = year || new this.oDate().getFullYear();
@@ -60,43 +60,43 @@
         return dt;
     };
 
-	proto.getQuarter = function(dt){
-		var dt = this.isDate(dt) ? dt: new this.oDate();
-		return Math.floor(parseInt(dt.getMonth())/3 + 1); 
-	};
-	
-	proto.getFiscalQuarter = function(yearEnd,dt){		
-		var dt = this.isDate(dt) ? dt: new this.oDate();
-		var yearEnd = (yearEnd ? yearEnd : 11) +1;
-		var m = dt.getMonth();
-		//hat tip to saltlakejohn - converted from his php function found somewhere on the interwebs
-		return Math.ceil(( m + ( 21 - ( yearEnd -1 ))) /3 ) %4 +1;
-	};
+    proto.getQuarter = function(dt) {
+        var dt = this.isDate(dt) ? dt: new this.oDate();
+        return Math.floor(parseInt(dt.getMonth()) / 3 + 1);
+    };
+
+    proto.getFiscalQuarter = function(yearEnd, dt) {
+        var dt = this.isDate(dt) ? dt: new this.oDate();
+        var yearEnd = (yearEnd ? yearEnd: 11) + 1;
+        var m = dt.getMonth();
+        //hat tip to saltlakejohn - converted from his php function found somewhere on the interwebs
+        return Math.ceil((m + (21 - (yearEnd - 1))) / 3) % 4 + 1;
+    };
 
     proto.getStandardizedCDS = function(contractLengthYears, dt) {
-		var cds = {
-			cdsm1 : {
-				m : 2,
-				d : 20
-			}, 
-			cdsm2 : {
-				m : 5,
-				d : 20
-			},
-			cdsm3 : {
-				m : 8,
-				d : 20
-			},
-			cdsm4 : {
-				m : 11,
-				d : 20
-			}
-		};
+        var cds = {
+            cdsm1: {
+                m: 2,
+                d: 20
+            },
+            cdsm2: {
+                m: 5,
+                d: 20
+            },
+            cdsm3: {
+                m: 8,
+                d: 20
+            },
+            cdsm4: {
+                m: 11,
+                d: 20
+            }
+        };
         var dt = this.isDate(dt) ? dt: new this.oDate();
-		var q = this.getQuarter(dt);
-		var fCDS = cds['cdsm'+q];
-		var maturity = new this.oDate((parseInt(dt.getFullYear())+contractLengthYears),fCDS.m,fCDS.d);
-		return maturity;
+        var q = this.getQuarter(dt);
+        var fCDS = cds['cdsm' + q];
+        var maturity = new this.oDate((parseInt(dt.getFullYear()) + contractLengthYears), fCDS.m, fCDS.d);
+        return maturity;
     };
 
 } ();
