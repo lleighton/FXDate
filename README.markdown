@@ -26,4 +26,8 @@ In the browser
 
 In node.js
 ----------
-Coming soon
+Simply import the module into your project `var fxdate = require('./src/fxdate.js');`
+
+See server.js for example.
+
+Enjoy!
