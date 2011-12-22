@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Page Title</title>
+	<script src="fxdate.js"></script>
+</head>
+<body>
+	<script>
+	var fxd = new FXDate();
+
+
+	//TODO - write tests...
+	var imm4_2011 = fxd.getIMM(4, 2011);
+	var imm1_2012 = fxd.getIMM(1, 2012);
+	var imm2_2012 = fxd.getIMM(2, 2012);
+	var imm3_2012 = fxd.getIMM(3, 2012);
+	var imm4_2012 = fxd.getIMM(4, 2012);
+	console.log(imm4_2012);
+
+	var spotdate = new FXDate().getSpot();
+	console.log(spotdate);
+
+	var qd = new Date(2011,1,14);
+	console.log(qd.toString())
+
+	var quarter = fxd.getQuarter(qd);
+	console.log(quarter);
+
+	var fq = fxd.getFiscalQuarter(7,qd);
+	console.log(fq)
+	
+	var maturity = fxd.getStandardizedCDS(5);
+	console.log(maturity.toString());
+	
+	console.log(fxd.isTradingDay());
+	</script>
+</body>
+</html>
