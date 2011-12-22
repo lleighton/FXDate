@@ -12,7 +12,7 @@ In the browser
 	<html>
 	<head>
 		<meta charset="utf-8">
-		<title>Page Title</title>
+		<title>Quick FXDates</title>
 		<script src="fxdate.js"></script>
 	</head>
 	<body>
