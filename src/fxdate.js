@@ -99,7 +99,8 @@
         var maturity = new this.oDate((parseInt(dt.getFullYear(),10) + contractLengthYears), fCDS.m, fCDS.d);
         return maturity;
     };
-	//returns a tenor length in days eg 1week = 1*7, 1month = 1*28 ...
+	//returns a tenor length in days eg 1week = 1*7, 1month = 1*28 ... 
+	//accepts a simple string for parsing: 1d(ay), 3w(eek) etc...
 	proto.getTenor = function(tenor){
 		for(unit in this.matchers){
 			var matched = this.matchers[unit].exec(tenor);
