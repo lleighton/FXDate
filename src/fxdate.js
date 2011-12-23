@@ -1,11 +1,17 @@
 !function() {
-
     var root = this;
     root.FXDate = root.FXDate ||
 	//if you use a date wrapper that supports the native js Date methods then you can optionally pass this in - e.g something like Date.js
     function(dateClass) {
-        this.oDate = dateClass || Date;
         //TODO - pass in a list of blacklisted/holiday days to check against
+        this.oDate = dateClass || Date;
+		this.units = {day : 1, week : 7, month : 28, year : 365};
+		this.matchers = {
+			day : /^([1-9]*)\s?d(ay)?s?/gi,
+			week : /^([1-9])*\s?w(ee)?k?s?/gi,
+			month : /^([1-9]*)\s?m(on)?t?h?/gi,
+			year : /^([1-9])*\s?y(ea)?r?s?/gi
+		};
     };
 
     if (typeof module !== 'undefined' && module.exports) {
@@ -36,16 +42,10 @@
         dt.setDate(thirdWeds);
         return dt;
     };
-    /*
-	Does not account for public holidays on "week days" - e.g. Christmas day, Boxing Day and New Years 
-	day would be picked as the closest spot days if they fell on week days regardless of market status.
-	
-    A validator class should be used outside of this lib if you wish to check the validity of days against local holidays.
-	
-	
-	*/
+
+    //does not account for public holidays at this point - will implement a todo for adding holiday/non-trading days.
     proto.getSpot = function(dt) {
-        var dt = this.isDate(dt) ? dt: new this.oDate();
+        var dt = this.isDate(dt) ? dt: new this.oDate(), spot;
         switch (dt.getDay()) {
         case 5:
         case 4:
@@ -63,7 +63,7 @@
 
     proto.getQuarter = function(dt) {
         var dt = this.isDate(dt) ? dt: new this.oDate();
-        return Math.floor(parseInt(dt.getMonth()) / 3 + 1);
+        return Math.floor(parseInt(dt.getMonth(),10) / 3 + 1);
     };
 
     proto.getFiscalQuarter = function(yearEnd, dt) {
@@ -96,8 +96,18 @@
         var dt = this.isDate(dt) ? dt: new this.oDate();
         var q = this.getQuarter(dt);
         var fCDS = cds['cdsm' + q];
-        var maturity = new this.oDate((parseInt(dt.getFullYear()) + contractLengthYears), fCDS.m, fCDS.d);
+        var maturity = new this.oDate((parseInt(dt.getFullYear(),10) + contractLengthYears), fCDS.m, fCDS.d);
         return maturity;
     };
+	//returns a tenor length in days eg 1week = 1*7, 1month = 1*28 ...
+	proto.getTenor = function(tenor){
+		for(unit in this.matchers){
+			var matched = this.matchers[unit].exec(tenor);
+			if(matched) 
+				return matched[1] * this.units[unit];
+		}
+		return 0;
+		
+	};
 
 } ();

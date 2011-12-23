@@ -5,6 +5,8 @@ FXDate is a simple utility for calculating Forex (FX) and other financial transa
 
 It is a very lightweight util that can be used in the browser or with node.js.
 
+(See the project index.html for a quick and dirty example.)
+
 In the browser
 --------------
 
