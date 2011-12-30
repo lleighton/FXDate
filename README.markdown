@@ -43,5 +43,5 @@ API
 * `getSpot([date])` - Returns the forward spot `Date` for a start date - if no date entered uses today as the start point
 * `getQuarter([date])` - Returns the year "quarter" (1-4) of a specific date.
 * `getFiscalQuarter(yearEnd[,date])` - Return the fiscal quarter (1-4) of a financial year based on the month (yearEnd) that the financial year is due to end.
-* `getStandardizedCDS(contractLengthYears[,dt])` - Returns the standardised maturity `Date` of a 5 year Credit Default Swap based on contract length and start date params
+* `getStandardizedCDS(contractLengthYears[,date])` - Returns the standardised maturity `Date` of a 5 year Credit Default Swap based on contract length and start date params
 * `getTenor(tenor)` - Return the numeric value in days of a "tenor" (1w, 1m, 1y). Attempts to parse a string e.g. 1 w/wk/week
