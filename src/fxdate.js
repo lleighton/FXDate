@@ -7,10 +7,10 @@
         this.oDate = dateClass || Date;
 		this.units = {day : 1, week : 7, month : 28, year : 365};
 		this.matchers = {
-			day : /^([1-9]*)\s?d(ay)?s?/gi,
-			week : /^([1-9])*\s?w(ee)?k?s?/gi,
-			month : /^([1-9]*)\s?m(on)?t?h?/gi,
-			year : /^([1-9])*\s?y(ea)?r?s?/gi
+			day : /^([1-9])*\s?d(ay)?s?/i,
+			week : /^([1-9])*\s?w(ee)?k?s?/i,
+			month : /^([1-9]*)\s?m(on)?t?h?/i,
+			year : /^([1-9])*\s?y(ea)?r?s?/i
 		};
     };
 
