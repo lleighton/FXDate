@@ -3,16 +3,20 @@
     root.FXDate = root.FXDate ||
 	//if you use a date wrapper that supports the native js Date methods then you can optionally pass this in - e.g something like Date.js
     function(dateClass) {
-        //TODO - pass in a list of blacklisted/holiday days to check against
-        this.oDate = dateClass || Date;
-		this.units = {day : 1, week : 7, month : 28, year : 365};
-		this.matchers = {
-			day : /^([1-9])*\s?d(ay)?s?/i,
-			week : /^([1-9])*\s?w(ee)?k?s?/i,
-			month : /^([1-9]*)\s?m(on)?t?h?/i,
-			year : /^([1-9])*\s?y(ea)?r?s?/i
-		};
+       return new FXDateWrapper(dateClass);
     };
+
+	var FXDateWrapper = function(dateClass){
+		 //TODO - pass in a list of blacklisted/holiday days to check against
+	        this.oDate = dateClass || Date;
+			this.units = {day : 1, week : 7, month : 28, year : 365};
+			this.matchers = {
+				day : /^([1-9])*\s?d(ay)?s?/i,
+				week : /^([1-9])*\s?w(ee)?k?s?/i,
+				month : /^([1-9]*)\s?m(on)?t?h?/i,
+				year : /^([1-9])*\s?y(ea)?r?s?/i
+			};
+	}
 
     if (typeof module !== 'undefined' && module.exports) {
         module.exports = root.FXDate;
@@ -20,7 +24,7 @@
     }
 
 
-    var proto = FXDate.prototype;
+    var proto = FXDateWrapper.prototype;
 
     proto.isDate = function(d) {
         if (Object.prototype.toString.call(d) !== "[object Date]")
