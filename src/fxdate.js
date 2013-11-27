@@ -53,7 +53,7 @@
 			immArray.push(this.getIMM(q,nYear));
 		}
 		return immArray;
-	}
+	};
 
     //does not account for public holidays
     proto.getSpot = function(dt) {
