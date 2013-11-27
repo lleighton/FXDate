@@ -49,13 +49,13 @@
 
 	proto.getIMMForYear = function(nYear){
 		var immArray = [];
-		for(q=1;q<=4;q++){
+		for(var q=1;q<=4;q++){
 			immArray.push(this.getIMM(q,nYear));
 		}
 		return immArray;
 	}
 
-    //does not account for public holidays at this point - will implement a todo for adding holiday/non-trading days.
+    //does not account for public holidays
     proto.getSpot = function(dt) {
         var dt = this.isDate(dt) ? dt: new this.oDate(), spot;
         switch (dt.getDay()) {
